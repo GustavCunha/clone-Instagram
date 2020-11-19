@@ -2,7 +2,8 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Feed from './src/pages/Feed';
 import { createStackNavigator } from '@react-navigation/stack';
-import {NavigationContainer} from '@react-navigation/native'
+import {NavigationContainer} from '@react-navigation/native';
+import Header from './src/components/Header';
 
 const Stack = createStackNavigator()
 
@@ -10,7 +11,7 @@ export default function App() {
   return (
     <View style={style.container}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Feed">
+        <Stack.Navigator initialRouteName="Feed" screenOptions={{headerTitle: () => <Header /> }}>
           <Stack.Screen name="Feed" component={Feed} />
         </Stack.Navigator>
       </NavigationContainer>
