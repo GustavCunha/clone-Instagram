@@ -1,31 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import Feed from './src/pages/Feed';
-import { createStackNavigator } from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
-import Header from './src/components/Header';
 
-const Stack = createStackNavigator()
+import Routes from './src/Routes/routes';
 
 export default function App() {
   return (
-    <View style={style.container}>
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName="Feed" screenOptions={{headerTitle: () => <Header /> }}>
-          <Stack.Screen name="Feed" component={Feed} />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </View>
+    <NavigationContainer>
+      <Routes />
+    </NavigationContainer>
   );
 }
-
-const style = StyleSheet.create(
-  {
-    container: {
-      flex: 1,
-      backgroundColor: '#fff' 
-    }
-  }
-)
-
-
