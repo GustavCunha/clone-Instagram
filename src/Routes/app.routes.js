@@ -24,11 +24,11 @@ export default function AppRoutes(){
                 component={Feed}
             />
 
-            <Screen
+            {/* <Screen
                 name="SignUp"
                 component={SignUp}
                 options={{headerShown: false}}
-            />
+            /> */}
         </Navigator>
     );
 }

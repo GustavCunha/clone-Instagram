@@ -8,6 +8,13 @@ export const Container = styled.View`
     flex:1;
 `;
 
+export const InputContainer = styled.View`
+    width: 90%;
+    justify-content: center;
+    align-items: center;
+    margin: 15px 0;
+`;
+
 export const Input = styled.TextInput`
     height: 40px;
     background-color: #FAFAFA;
@@ -27,7 +34,7 @@ export const Button = styled(RectButton)`
     align-items: center;
     margin-top: 10px;
 
-    // #2d5ff5 ou #4169e1
+    // #2d5ff5 ou #4169e1 ou #0095f6 ou #385185
 `;
 
 export const Label = styled.Text`
@@ -54,6 +61,6 @@ export const Link = styled.TouchableOpacity`
 
 export const TextLink = styled.Text`
     font-weight: bold;
-    color: #888;
+    color: ${({bgColor}) => bgColor};
     font-size: 15px;
 `;
