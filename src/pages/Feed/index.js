@@ -2,10 +2,21 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { StyleSheet, FlatList,Button , View, ScrollView, TextInput} from 'react-native';
 import axios from 'axios'
 import LazyImage from '../../components/LazyImage';
+import {Feather, FontAwesome} from '@expo/vector-icons';
 import { AsyncStorage } from 'react-native';
 
-
-import { Container, Post, Header, Avatar, Name, Description, Loading } from './styles';
+import { 
+  Container, 
+  Post, 
+  Header, 
+  Avatar, 
+  Name, 
+  Description, 
+  Loading, 
+  Buttons, 
+  ButtonContainer,
+  ButtonIcon 
+} from './styles';
 
 export default function Feed() {
   const [error, setError] = useState('');
@@ -16,7 +27,8 @@ export default function Feed() {
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const [text, setText] = useState('')
-  const [comentarios, setComentarios] = useState([])
+  const [comentarios, setComentarios] = useState([]);
+  const [like, setLike] = useState(false);
 
   const MAX_LENGTH = 250;
 
@@ -84,44 +96,62 @@ export default function Feed() {
   }, []);
 
  
+  function handleLike(){
+    setLike(!like);
+  }
 
   const renderItem = ({item}) => {
     return (
       <Post>
-            <Header>
-              <Avatar source={{ uri: item.author.avatar }} />
-              <Name>{item.author.name}</Name>
-            </Header>
+        <Header>
+          <Avatar source={{ uri: item.author.avatar }} />
+          <Name>{item.author.name}</Name>
+        </Header>
 
-            <LazyImage
-              aspectRatio={item.aspectRatio} 
-              shouldLoad={viewable.includes(item.id)} 
-              smallSource={{ uri: item.small }}
-              source={{ uri: item.image }}
-            />
+        <LazyImage
+          aspectRatio={item.aspectRatio} 
+          shouldLoad={viewable.includes(item.id)} 
+          smallSource={{ uri: item.small }}
+          source={{ uri: item.image }}
+        />
+        <Buttons>
+          <ButtonContainer>
+            <ButtonIcon onPress={handleLike} activeOpacity={0.8}>
+              <Feather name="heart" size={24} color={like ? '#FF0000' : '#000000'}/>
+            </ButtonIcon>
+            <ButtonIcon>
+              <Feather name="message-circle" size={24} />
+            </ButtonIcon>
+            <ButtonIcon>
+              <Feather name="send" size={24} />
+            </ButtonIcon>
+          </ButtonContainer>
+          <ButtonIcon>
+            <Feather name="bookmark" size={24}/>
+          </ButtonIcon>
+        </Buttons>
+        <Description>
+          <Name>{item.author.name}</Name> {item.description}
+        </Description>
 
-            <Description>
-              <Name>{item.author.name}</Name> {item.description}
-            </Description>
-            <Description>
-              {comentarios}
-            </Description>
+        <Description>
+          {comentarios}
+        </Description>
            
+        <TextInput
+          multiline={true}
+          onChangeText={(text) => setText(text)}
+          placeholder={"Comentários"}
+          style={[styles.text]}
+          maxLength={MAX_LENGTH}
+          value={text}
+        />
 
-            <TextInput
-              multiline={true}
-              onChangeText={(text) => setText(text)}
-              placeholder={"Comentários"}
-              style={[styles.text]}
-              maxLength={MAX_LENGTH}
-              value={text}/>
-
-            <Button
-              title="Salvar"
-              onPress={() => onSave(String(item.id))}
-              accessibilityLabel="Salvar">
-            </Button>
-
+        <Button
+          title="Salvar"
+          onPress={() => onSave(String(item.id))}
+          accessibilityLabel="Salvar">
+        </Button>
       </Post>
     )
   }

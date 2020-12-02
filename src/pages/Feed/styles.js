@@ -21,6 +21,20 @@ export const Avatar = styled.Image`
   margin-right: 10px;
 `;
 
+export const Buttons = styled.View`
+  flex-direction: row;
+  margin: 5px;
+  justify-content: space-between;
+`;
+
+export const ButtonContainer = styled.View`
+  flex-direction: row;
+`;
+
+export const ButtonIcon = styled.TouchableOpacity`
+  margin: 5px 10px;
+`;
+
 export const Name = styled.Text`
   font-weight: 600;
 `;
