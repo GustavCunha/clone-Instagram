@@ -4,6 +4,7 @@ import axios from 'axios'
 import LazyImage from '../../components/LazyImage';
 import {Feather, FontAwesome} from '@expo/vector-icons';
 import { AsyncStorage } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 import { 
   Container, 
@@ -29,6 +30,8 @@ export default function Feed() {
   const [text, setText] = useState('')
   const [comentarios, setComentarios] = useState([]);
   const [like, setLike] = useState(false);
+
+  const navigation = useNavigation();
 
   const MAX_LENGTH = 250;
 
@@ -100,6 +103,10 @@ export default function Feed() {
     setLike(!like);
   }
 
+  function handleToComment(){
+    navigation.navigate('Comment');
+  }
+
   const renderItem = ({item}) => {
     return (
       <Post>
@@ -119,7 +126,7 @@ export default function Feed() {
             <ButtonIcon onPress={handleLike} activeOpacity={0.8}>
               <Feather name="heart" size={24} color={like ? '#FF0000' : '#000000'}/>
             </ButtonIcon>
-            <ButtonIcon>
+            <ButtonIcon onPress={handleToComment}>
               <Feather name="message-circle" size={24} />
             </ButtonIcon>
             <ButtonIcon>
