@@ -5,10 +5,11 @@ import LazyImage from '../../components/LazyImage';
 import {Feather, FontAwesome} from '@expo/vector-icons';
 import { AsyncStorage } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import Post from '../../components/Post';
 
 import { 
   Container, 
-  Post, 
+  //Post, 
   Header, 
   Avatar, 
   Name, 
@@ -29,7 +30,7 @@ export default function Feed() {
   const [refreshing, setRefreshing] = useState(false);
   const [text, setText] = useState('')
   const [comentarios, setComentarios] = useState([]);
-  const [like, setLike] = useState(false);
+  
 
   const navigation = useNavigation();
 
@@ -107,7 +108,15 @@ export default function Feed() {
     navigation.navigate('Comment');
   }
 
+  const renderPost = ({item}) => {
+    return(
+      <Post item={item}/>
+    );  
+    
+  }
+
   const renderItem = ({item}) => {
+
     return (
       <Post>
         <Header>
