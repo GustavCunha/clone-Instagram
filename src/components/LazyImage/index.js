@@ -13,7 +13,7 @@ export default function LazyImage({
 }) {
   const opacity = new Animated.Value(0);
 
-  const [loaded, setLoaded] = useState(false);
+  const [loaded, setLoaded] = useState(true);
   
   useEffect(() => {
     if (shouldLoad) {
@@ -36,7 +36,8 @@ export default function LazyImage({
       source={smallSource}
       aspect={aspectRatio}
       resizeMode="contain"
-      blurRadius={3}>
+      blurRadius={3}
+    >
       { loaded && (
         <AnimatedOriginal 
           style={{ opacity }}

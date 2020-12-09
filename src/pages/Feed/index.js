@@ -94,13 +94,10 @@ export default function Feed() {
     }
   }
 
-    
-
   useEffect(() => {
     loadPage()
   }, []);
 
- 
   function handleLike(){
     setLike(!like);
   }
@@ -185,10 +182,10 @@ export default function Feed() {
         keyExtractor={item => String(item.id)}
         renderItem={renderPost}
         ListFooterComponent={loading && <Loading />}
-        onViewableItemsChanged={handleViewableChanged}
-        viewabilityConfig={{
-          viewAreaCoveragePercentThreshold: 10,
-        }}
+        // onViewableItemsChanged={handleViewableChanged}
+        // viewabilityConfig={{
+        //   viewAreaCoveragePercentThreshold: 10,
+        // }}
         showsVerticalScrollIndicator={false}
         onRefresh={refreshList}
         refreshing={refreshing}
