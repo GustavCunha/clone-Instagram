@@ -5,11 +5,11 @@ import LazyImage from '../../components/LazyImage';
 import {Feather, FontAwesome} from '@expo/vector-icons';
 import { AsyncStorage } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import Post from '../../components/Post';
+import Publication from '../../components/Publication';
 
 import { 
   Container, 
-  //Post, 
+  Post, 
   Header, 
   Avatar, 
   Name, 
@@ -30,6 +30,7 @@ export default function Feed() {
   const [refreshing, setRefreshing] = useState(false);
   const [text, setText] = useState('')
   const [comentarios, setComentarios] = useState([]);
+  const [like, setLike] = useState(false);
   
 
   const navigation = useNavigation();
@@ -110,7 +111,7 @@ export default function Feed() {
 
   const renderPost = ({item}) => {
     return(
-      <Post item={item}/>
+      <Publication item={item}/>
     );  
     
   }
@@ -147,7 +148,7 @@ export default function Feed() {
           </ButtonIcon>
         </Buttons>
         <Description>
-          <Name>{item.author.name}</Name> {item.description}
+          <Name>{item.author.name}</Name> {item.description} 
         </Description>
 
         <Description>
@@ -182,7 +183,7 @@ export default function Feed() {
         key="list"
         data={feed}
         keyExtractor={item => String(item.id)}
-        renderItem={renderItem}
+        renderItem={renderPost}
         ListFooterComponent={loading && <Loading />}
         onViewableItemsChanged={handleViewableChanged}
         viewabilityConfig={{
