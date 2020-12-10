@@ -105,6 +105,9 @@ export default function Feed() {
   function handleToComment(){
     navigation.navigate('Comments');
   }
+  function handleToLikes(){
+    navigation.navigate('Likes');
+  }
 
   const renderPost = ({item}) => {
     return(
@@ -144,6 +147,9 @@ export default function Feed() {
             <Feather name="bookmark" size={24}/>
           </ButtonIcon>
         </Buttons>
+        <TouchableOpacity onPress={handleToLikes}>
+          <Text>Curtido por...</Text>
+        </TouchableOpacity>
         <Description>
           <Name>{item.author.name}</Name> {item.description} 
         </Description>
