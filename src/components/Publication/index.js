@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import {Feather, FontAwesome} from '@expo/vector-icons';
 import LazyImage from '../LazyImage';
-
+import { useNavigation } from '@react-navigation/native'
 import { 
     Author,
     Avatar,
@@ -20,11 +20,10 @@ import { View } from 'react-native';
 export default function Publication({item}){
     const [like, setLike] = useState(false);
     const [viewable, setViewable] = useState([]);
-
+    const navigation = useNavigation();
     function handleLike(){
         setLike(!like);
-    }
-
+    }    
     return(
         <Container>
             <Header>
@@ -49,7 +48,7 @@ export default function Publication({item}){
                                 <FontAwesome name="heart" size={24} color="#FF0000" />
                             )}
                         </ButtonIcon>
-                        <ButtonIcon >
+                        <ButtonIcon onPress={() => navigation.navigate('Comment', { imageId: item.id })}>
                             <Feather name="message-circle" size={24} />
                         </ButtonIcon>
                         <ButtonIcon >

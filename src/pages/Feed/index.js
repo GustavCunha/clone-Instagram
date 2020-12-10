@@ -3,7 +3,7 @@ import { StyleSheet, FlatList,Button , View, ScrollView, TextInput} from 'react-
 import axios from 'axios'
 import LazyImage from '../../components/LazyImage';
 import {Feather, FontAwesome} from '@expo/vector-icons';
-import { AsyncStorage } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import Publication from '../../components/Publication';
 
@@ -42,10 +42,6 @@ export default function Feed() {
     if (loading) return;
 
     setLoading(true);
-    //http://localhost:3000/feed?_expand=author&_limit=4&_page=1
-    //utilizar server.js no jsonserver
-    //https://5fa103ace21bab0016dfd97e.mockapi.io/api/v1/feed?page=1&limit=4
-    //utilizar o server2.js no www.mockapi.io
     axios
     .get(`https://5fa103ace21bab0016dfd97e.mockapi.io/api/v1/feed?page=${pageNumber}&limit=4`)
     .then(response => {
@@ -103,7 +99,7 @@ export default function Feed() {
   }
 
   function handleToComment(){
-    navigation.navigate('Comments');
+    navigation.navigate('Message');
   }
 
   const renderPost = ({item}) => {
@@ -114,7 +110,6 @@ export default function Feed() {
   }
 
   const renderItem = ({item}) => {
-
     return (
       <Post>
         <Header>
