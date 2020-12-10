@@ -13,7 +13,7 @@ export const AuthProvider = ({children}) => {
     const [logged, setLogged] = useState(false);
     
     async function logIn(usuario, senha){
-        const response = await API.post('/login', {
+        const response = await API.post('/user/login', {
             user: usuario,
             password: senha
         });

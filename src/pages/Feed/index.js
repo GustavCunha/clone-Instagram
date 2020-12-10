@@ -81,14 +81,14 @@ export default function Feed() {
     }
   }
 
-  const onSave = async (id) => {
-    try {
-      await AsyncStorage.setItem(id, text);
-      setComentarios([...comentarios, ...text])
-    } catch (error) {
-      // Error saving data
-    }
-  }
+  // const onSave = async (id) => {
+  //   try {
+  //     await AsyncStorage.setItem(id, text);
+  //     setComentarios([...comentarios, ...text])
+  //   } catch (error) {
+  //     // Error saving data
+  //   }
+  // }
 
   useEffect(() => {
     loadPage()

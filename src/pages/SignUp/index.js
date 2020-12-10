@@ -15,6 +15,7 @@ import {
     TextLink, 
     Bold
 } from './styles';
+import API from '../../services/api';
 
 export default function SignUp(){
 
@@ -27,6 +28,26 @@ export default function SignUp(){
 
     function handleLogin(){
         navigation.navigate('Login');
+    }
+
+    async function handleSignUp(){
+        if(name.length === 0 || user.length === 0 || password.length === 0){
+            alert('Preencha usuário e/ou senha para continuar!');
+        }else{
+            const data = {
+                name,
+                user,
+                password
+            };
+            try {
+                await API.post('/user/signup', data);
+                alert('Cadastro Realizado');
+                handleLogin();
+            } catch (error) {
+                console.log(error);
+                alert('Erro ao cadastrar!');
+            }
+        }
     }
 
     function onChangePassword(value){
@@ -69,7 +90,10 @@ export default function SignUp(){
                 autoCapitalize="none"
             />
 
-            <Button style={{backgroundColor: disabledBtn ? '#b2dffc' : '#4169e1'}}>
+            <Button 
+                style={{backgroundColor: disabledBtn ? '#b2dffc' : '#4169e1'}} 
+                onPress={handleSignUp}
+            >
                 <Text style={{color: '#FFF'}}>Cadastre-se</Text>
             </Button>
 

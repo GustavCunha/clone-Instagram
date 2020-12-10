@@ -6,7 +6,7 @@ const screenWidth = Math.round(Dimensions.get('window').width);
 
 export const Container = styled.View`
     flex: 1;
-    min-width: ${screenWidth}px;
+    /* min-width: ${screenWidth}px; */
     min-height: 50px;
     flex-direction: row;    
     justify-content: center;
