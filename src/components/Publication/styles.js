@@ -36,6 +36,10 @@ export const ButtonIcon = styled.TouchableOpacity.attrs({
   margin: 5px 10px;
 `;
 
+export const Link = styled.TouchableOpacity`
+  padding-left: 10px;
+`;
+
 export const Description = styled.Text`
   padding: 10px;
   line-height: 18px;

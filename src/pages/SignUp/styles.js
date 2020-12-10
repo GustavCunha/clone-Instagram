@@ -41,7 +41,7 @@ export const Button = styled.TouchableOpacity`
 `;
 
 export const TextFooter = styled.Text`
-    color: #a18e8e;
+    color: #8e8e8e;
     width: 75%;
     margin: 20px 40px;
     text-align: center;
@@ -50,7 +50,7 @@ export const TextFooter = styled.Text`
 `;
 
 export const Bold = styled.Text`
-    color: #a18e8e;
+    color: #8e8e8e;
     width: 75%;
     margin: 20px 40px;
     text-align: center;

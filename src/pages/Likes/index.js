@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { Container } from './styles';
+import { Title } from './styles';
 import { FlatList } from 'react-native';
 import Header from '../../components/Header';
 
 import api from '../../services/api';
 
-export default function Comment(){
+export default function Like(){
     const [likes, setLikes] = useState([
         {id: 1, name: 'Felipe', description: 'curtiu seu post.'},
         {id: 2, name: 'Leonardo', description: 'curtiu seu post.'},

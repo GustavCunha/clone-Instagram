@@ -78,7 +78,7 @@ export default function Login(){
 
             </InputContainer>
 
-            <Divider color="#8e8ea1" orientation="center"> 
+            <Divider color="#8e8e8e" orientation="center"> 
                 OU
             </Divider>
 

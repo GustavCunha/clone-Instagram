@@ -66,7 +66,7 @@ export default function SignUp(){
 
             <Title>Cadastre-se para ver fotos e vídeos dos seus amigos</Title>
 
-            <Divider color="#8e8ea1" orientation="center"> 
+            <Divider color="#8e8e8e" orientation="center"> 
                 Preencha os campos
             </Divider>
 

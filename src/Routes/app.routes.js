@@ -7,6 +7,7 @@ import Header from '../components/Header';
 import Comment from '../pages/Comments';
 import { Image, Text } from 'react-native';
 import Logo from '../assets/logo.png';
+import Like from '../pages/Likes';
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -31,6 +32,10 @@ export default function AppRoutes(){
       <Screen
         name="Comment"
         component={Comment}
+      />
+      <Screen
+        name="Likes"
+        component={Like}
       />
     </Navigator>
   );

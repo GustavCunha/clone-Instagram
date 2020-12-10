@@ -11,19 +11,25 @@ import {
     Description,
     Footer, 
     Header,
+    Link,
     Main,
     Name,
 } from './styles';
-import { View } from 'react-native';
+import { TouchableOpacity, View, Text } from 'react-native';
 
 
 export default function Publication({item}){
     const [like, setLike] = useState(false);
     const [viewable, setViewable] = useState([]);
     const navigation = useNavigation();
+    
     function handleLike(){
         setLike(!like);
     }    
+
+    function handleToLikes(){
+        navigation.navigate('Likes');
+      }
     return(
         <Container>
             <Header>
@@ -59,6 +65,9 @@ export default function Publication({item}){
                         <Feather name="bookmark" size={24} />
                     </ButtonIcon>
                 </Buttons>
+                <Link onPress={handleToLikes}>
+                    <Text>Curtido por ...</Text>
+                </Link>
                 <Description>
                     <Author>{item.author.name}</Author> {item.description} 
                 </Description>
