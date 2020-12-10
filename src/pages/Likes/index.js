@@ -4,14 +4,22 @@ import { FlatList } from 'react-native';
 import Header from '../../components/Header';
 
 export default function Comment(){
-  const likes = [
-    {id: 1, description: 'Felipe curtiu sua foto.'},
-    {id: 2, description: 'Leonardo curtiu sua foto.'},
-    {id: 3, description: 'Gustavo curtiu sua foto.'},
-    {id: 4, description: 'Tiago curtiu sua foto.'},
-    {id: 5, description: 'Maria curtiu sua foto.'},
-    {id: 6, description: 'Fernanda curtiu sua foto.'}
-  ]
+    const [likes, setLikes] = useState([
+        {id: 1, name: 'Felipe', description: 'curtiu seu post.'},
+        {id: 2, name: 'Leonardo', description: 'curtiu seu post.'},
+        {id: 3, name: 'Gustavo', description: 'curtiu seu post.'}
+    ]);
+
+    const liked = (id) => {
+        const likeList = likes.find(whoLiked => whoLiked.id === id);
+        setLikes(likeList);
+    }
+
+    const renderPost = ({likes}) => {
+        return(
+            <Publication likes={likes}/>
+        );      
+    }
 
     return(
         <>
@@ -24,12 +32,7 @@ export default function Comment(){
                     data={likes}
                     keyExtractor={likes => String(likes.id)}
                     renderItem={renderPost}
-                    ListFooterComponent={loading && <Loading />}
                     showsVerticalScrollIndicator={false}
-                    onRefresh={refreshList}
-                    refreshing={refreshing}
-                    onEndReachedThreshold={0.1}
-                    onEndReached={() => loadPage()}
                 />
             </Container>
         </>
