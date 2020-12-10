@@ -3,6 +3,8 @@ import { Container } from './styles';
 import { FlatList } from 'react-native';
 import Header from '../../components/Header';
 
+import api from '../../services/api';
+
 export default function Comment(){
     const [likes, setLikes] = useState([
         {id: 1, name: 'Felipe', description: 'curtiu seu post.'},
@@ -15,10 +17,15 @@ export default function Comment(){
         setLikes(likeList);
     }
 
-    const renderPost = ({likes}) => {
-        return(
-            <Publication likes={likes}/>
-        );      
+    const renderPost = ({ item }) => {
+      const { name, description, id } = item;
+  
+      return(
+        <LikedContainer>
+          <LikedUsername>{name}</LikedUsername>
+          <LikedDescription>{description}</LikedDescription>
+        </LikedContainer>
+      );  
     }
 
     return(
