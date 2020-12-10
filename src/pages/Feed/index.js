@@ -103,7 +103,7 @@ export default function Feed() {
   }
 
   function handleToComment(){
-    navigation.navigate('Comment');
+    navigation.navigate('Comments');
   }
 
   const renderPost = ({item}) => {
@@ -151,7 +151,6 @@ export default function Feed() {
         <Description>
           {comentarios}
         </Description>
-           
         <TextInput
           multiline={true}
           onChangeText={(text) => setText(text)}

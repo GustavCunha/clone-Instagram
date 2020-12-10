@@ -1,6 +1,8 @@
 import styled from 'styled-components/native';
 
-export const Container = styled.View`
+export const Title = styled.h1`
     flex: 1;
-    background-color: #a1b2c3;
+    font-size: 10px;
 `;
+
+
