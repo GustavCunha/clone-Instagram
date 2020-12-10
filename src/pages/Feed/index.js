@@ -146,7 +146,6 @@ export default function Feed() {
         <Description>
           {comentarios}
         </Description>
-           
         <TextInput
           multiline={true}
           onChangeText={(text) => setText(text)}

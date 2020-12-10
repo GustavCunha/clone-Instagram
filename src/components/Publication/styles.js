@@ -40,7 +40,6 @@ export const Description = styled.Text`
   padding: 10px;
   line-height: 18px;
   font-size: 13px;
-
 `;
 
 export const Author = styled.Text`
