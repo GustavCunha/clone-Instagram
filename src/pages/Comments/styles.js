@@ -42,3 +42,5 @@ export const ButtonIcon = styled.TouchableOpacity.attrs({
 })`
   margin: 5px 10px;
 `;
+
+export const Container = styled.View``;

@@ -16,7 +16,7 @@ export const Container = styled.View`
 export const HeaderContainer = styled.View`
     display: flex;
     flex-direction: row;
-    padding: 0 20px;
+    padding: 0 5px;
     width: 100%;
     justify-content: space-between;
 `

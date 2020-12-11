@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Title } from './styles';
+import { Container, Title } from './styles';
 import { FlatList } from 'react-native';
 import Header from '../../components/Header';
 

@@ -29,7 +29,11 @@ export default function Publication({item}){
 
     function handleToLikes(){
         navigation.navigate('Likes');
-      }
+    }
+
+    function handleToComments(){
+        navigation.navigate('Comment', {imageId: item.id});
+    }
     return(
         <Container>
             <Header>
@@ -54,7 +58,7 @@ export default function Publication({item}){
                                 <FontAwesome name="heart" size={24} color="#FF0000" />
                             )}
                         </ButtonIcon>
-                        <ButtonIcon onPress={() => navigation.navigate('Comment', { imageId: item.id })}>
+                        <ButtonIcon onPress={handleToComments}>
                             <Feather name="message-circle" size={24} />
                         </ButtonIcon>
                         <ButtonIcon >

@@ -46,13 +46,13 @@ export default function Comment() {
   return(
     <Container>
         <FlatList
-        key="comments"
-        data={commentList}
-        keyExtractor={item => String(item.id)}
-        renderItem={renderPost}
-        ListFooterComponent={loading && <Loading />}
-        showsVerticalScrollIndicator={false}
-        onEndReachedThreshold={0.1}
+          key="comments"
+          data={commentList}
+          keyExtractor={item => String(item.id)}
+          renderItem={renderPost}
+          ListFooterComponent={loading && <Loading />}
+          showsVerticalScrollIndicator={false}
+          onEndReachedThreshold={0.1}
       />
     </Container>
   );
