@@ -17,14 +17,17 @@ export const AuthProvider = ({children}) => {
             user: usuario,
             password: senha
         });
-
+        // console.log(response.data.usuario._id);
+        
         await AsyncStorage.setItem('@CloneInsta:user', JSON.stringify(response.data));
+        await AsyncStorage.setItem('@CloneInsta:userID', JSON.stringify(response.data.usuario._id));
         setLogged(true);
         return response.data;
     }
 
     async function logOff(){
         await AsyncStorage.removeItem('@CloneInsta:user');
+        await AsyncStorage.removeItem('@CloneInsta:userID');
         setLogged(false);
     }
 

@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {Feather, FontAwesome} from '@expo/vector-icons';
 import LazyImage from '../LazyImage';
 import { useNavigation } from '@react-navigation/native'
@@ -11,20 +11,36 @@ import {
     Description,
     Footer, 
     Header,
+    ImageContainer,
+    Imagem,
     Link,
     Main,
     Name,
 } from './styles';
-import { TouchableOpacity, View, Text } from 'react-native';
+import { TouchableOpacity, View, Text, ScrollView, Image } from 'react-native';
+import API from '../../services/api';
+import AsyncStorage from '@react-native-community/async-storage';
 
 
 export default function Publication({item}){
     const [like, setLike] = useState(false);
     const [viewable, setViewable] = useState([]);
     const navigation = useNavigation();
+    let result;
+
+    useEffect(()=>{
+        async function loadUser(){
+            result = await AsyncStorage.getItem('@CloneInsta:userID');
+        }
+        loadUser();
+    },[result]);
     
-    function handleLike(){
+    async function handleLike(){
+        console.log(result);
         setLike(!like);
+        await API.post(`/posts/likes/${item._id}`,{
+            user: result
+        });
     }    
 
     function handleToLikes(){
@@ -39,17 +55,28 @@ export default function Publication({item}){
         <Container>
             <Header>
                 {/* Avatar e Nome  */}
-                {/* <Avatar source={item.user.avatar}/> */}
+                <Avatar source={{uri: item.user.avatar}}/>
                 <Name>{item.user.name}</Name>
             </Header>
             <Main>
                 {/* Imagem, Buttons, Description */}
-                <LazyImage
+                <ImageContainer>
+                    <ScrollView horizontal pagingEnabled>
+                        {
+                            item.image.map(image => {
+                                return(
+                                    <Imagem key={image} source={{uri: image}} />
+                                )
+                            })
+                        }
+                    </ScrollView>
+                </ImageContainer>
+                {/* <LazyImage
                     aspectRatio={item.image.aspectRatio} 
                     shouldLoad={viewable.includes(item._id)} 
                     smallSource={item.image.small}
                     source={item.image[1]}
-                />
+                /> */}
                 <Buttons>
                     <View style={{flexDirection: 'row'}}>
                         <ButtonIcon onPress={handleLike} >

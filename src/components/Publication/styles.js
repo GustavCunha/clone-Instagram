@@ -52,3 +52,13 @@ export const Author = styled.Text`
 `;
 
 export const Footer = styled.View``;
+
+export const Imagem = styled.Image`
+  width: 450px;
+  height: 300px;
+`;
+
+export const ImageContainer = styled.View`
+  width: 450px;
+  height: 300px;
+`;
