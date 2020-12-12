@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {FontAwesome} from '@expo/vector-icons';
 import { CommentContainer, CommentUsername, CommentUserComment, CommentLeftSide, CommentRightSide, ButtonIcon } from './styles';
 
-const SingleComment = ({ item }) => {
+const SingleComment = ({ user, description }) => {
   const [like, setLike] = useState(false);
   const handleLike = () => {
     setLike(!like);
@@ -10,8 +10,8 @@ const SingleComment = ({ item }) => {
   return(
     <CommentContainer>
       <CommentLeftSide>
-        <CommentUsername>{item.name}</CommentUsername>
-        <CommentUserComment>{item.description}</CommentUserComment>
+        <CommentUsername>{user.name}</CommentUsername>
+        <CommentUserComment>{description}</CommentUserComment>
       </CommentLeftSide>
       <CommentRightSide>
         <ButtonIcon onPress={handleLike} >

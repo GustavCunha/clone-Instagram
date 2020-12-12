@@ -20,6 +20,8 @@ import {
   ButtonIcon 
 } from './styles';
 
+import api from '../../services/api';
+
 export default function Feed() {
   const [error, setError] = useState('');
   const [feed, setFeed] = useState([]);
@@ -37,26 +39,46 @@ export default function Feed() {
 
   const MAX_LENGTH = 250;
 
-  async function loadPage(pageNumber = page, shouldRefresh = false) {
-    if (pageNumber === total) return;
-    if (loading) return;
+  // async function loadPage(pageNumber = page, shouldRefresh = false) {
+  //   if (pageNumber === total) return;
+  //   if (loading) return;
 
-    setLoading(true);
-    axios
-    .get(`https://5fa103ace21bab0016dfd97e.mockapi.io/api/v1/feed?page=${pageNumber}&limit=4`)
-    .then(response => {
-      const totalItems = response.headers["x-total-count"]
-      const data = response.data
-      //console.log(data)
-      setLoading(false)
-      setTotal(Math.floor(totalItems / 4));
-      setPage(pageNumber + 1);
-      setFeed(shouldRefresh ? data : [...feed, ...data]);
-    })
-    .catch(err => {
-      setError(err.message);
-      setLoading(true)
-    })
+  //   setLoading(true);
+  //   axios
+  //   .get(`https://5fa103ace21bab0016dfd97e.mockapi.io/api/v1/feed?page=${pageNumber}&limit=4`)
+  //   .then(response => {
+  //     const totalItems = response.headers["x-total-count"]
+  //     const data = response.data
+  //     //console.log(data)
+  //     setLoading(false)
+  //     setTotal(Math.floor(totalItems / 4));
+  //     setPage(pageNumber + 1);
+  //     setFeed(shouldRefresh ? data : [...feed, ...data]);
+  //   })
+  //   .catch(err => {
+  //     setError(err.message);
+  //     setLoading(true)
+  //   })
+  // }
+
+  const loadPage = async (pageNumber = page, shouldRefresh = false) => {
+    if (pageNumber === total) return;
+    if (loading) return; 
+
+    const feedList = await api
+      .get('/posts')
+      .catch(err => {
+        setError(err.message);
+        setLoading(true);
+      })
+
+      // const totalItems = feedList.headers["x-total-count"];
+      // const data = feedList.data;
+      // setLoading(false);
+      // setTotal(Math.floor(totalItems / 4));
+      // setPage(pageNumber + 1);
+      // setFeed(shouldRefresh ? data : [...feed, ...data]);
+      setFeed(feedList.data);
   }
 
   async function refreshList() {
@@ -76,7 +98,7 @@ export default function Feed() {
         // We have data!!
         setComentarios(value)
       } 
-    } catch (error) {
+    } catch (err) {
       // Error saving data
     }
   }
@@ -91,7 +113,7 @@ export default function Feed() {
   // }
 
   useEffect(() => {
-    loadPage()
+    loadPage();
   }, []);
 
   function handleLike(){
@@ -101,73 +123,20 @@ export default function Feed() {
   function handleToComment(){
     navigation.navigate('Message');
   }
+
   function handleToLikes(){
     navigation.navigate('Likes');
   }
 
   const renderPost = ({item}) => {
+    // const { image, comments, user, description, _id } = item;
+
+    console.log(item.user.name);
+
     return(
       <Publication item={item}/>
     );  
     
-  }
-
-  const renderItem = ({item}) => {
-    return (
-      <Post>
-        <Header>
-          <Avatar source={{ uri: item.author.avatar }} />
-          <Name>{item.author.name}</Name>
-        </Header>
-
-        <LazyImage
-          aspectRatio={item.aspectRatio} 
-          shouldLoad={viewable.includes(item.id)} 
-          smallSource={{ uri: item.small }}
-          source={{ uri: item.image }}
-        />
-        <Buttons>
-          <ButtonContainer>
-            <ButtonIcon onPress={handleLike} activeOpacity={0.8}>
-              <Feather name="heart" size={24} color={like ? '#FF0000' : '#000000'}/>
-            </ButtonIcon>
-            <ButtonIcon onPress={handleToComment}>
-              <Feather name="message-circle" size={24} />
-            </ButtonIcon>
-            <ButtonIcon>
-              <Feather name="send" size={24} />
-            </ButtonIcon>
-          </ButtonContainer>
-          <ButtonIcon>
-            <Feather name="bookmark" size={24}/>
-          </ButtonIcon>
-        </Buttons>
-        <TouchableOpacity onPress={handleToLikes}>
-          <Text>Curtido por...</Text>
-        </TouchableOpacity>
-        <Description>
-          <Name>{item.author.name}</Name> {item.description} 
-        </Description>
-
-        <Description>
-          {comentarios}
-        </Description>
-        <TextInput
-          multiline={true}
-          onChangeText={(text) => setText(text)}
-          placeholder={"Comentários"}
-          style={[styles.text]}
-          maxLength={MAX_LENGTH}
-          value={text}
-        />
-
-        <Button
-          title="Salvar"
-          onPress={() => onSave(String(item.id))}
-          accessibilityLabel="Salvar">
-        </Button>
-      </Post>
-    )
   }
   
   const handleViewableChanged = useCallback(({ changed }) => {
@@ -179,13 +148,9 @@ export default function Feed() {
       <FlatList
         key="list"
         data={feed}
-        keyExtractor={item => String(item.id)}
+        keyExtractor={item => String(item._id)}
         renderItem={renderPost}
         ListFooterComponent={loading && <Loading />}
-        // onViewableItemsChanged={handleViewableChanged}
-        // viewabilityConfig={{
-        //   viewAreaCoveragePercentThreshold: 10,
-        // }}
         showsVerticalScrollIndicator={false}
         onRefresh={refreshList}
         refreshing={refreshing}
