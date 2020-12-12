@@ -35,8 +35,6 @@ export default function Publication({item}){
         navigation.navigate('Comment', {imageId: item._id});
     }
 
-    console.log(item);
-
     return(
         <Container>
             <Header>

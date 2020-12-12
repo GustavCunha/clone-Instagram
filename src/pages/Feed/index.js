@@ -131,7 +131,7 @@ export default function Feed() {
   const renderPost = ({item}) => {
     // const { image, comments, user, description, _id } = item;
 
-    console.log(item.user.name);
+    // console.log(item.user.name);
 
     return(
       <Publication item={item}/>
