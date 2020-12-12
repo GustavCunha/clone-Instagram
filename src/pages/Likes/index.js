@@ -1,47 +1,46 @@
-import React, { useState } from 'react';
-import { Container, Title } from './styles';
+import React, { useState, useEffect } from 'react';
+import { 
+  Container,
+  LikedContainer, 
+  LikedDescription, 
+  LikedUsername 
+} from './styles';
 import { FlatList } from 'react-native';
-import Header from '../../components/Header';
 
 import api from '../../services/api';
 
-export default function Like(){
-    const [likes, setLikes] = useState([
-        {id: 1, name: 'Felipe', description: 'curtiu seu post.'},
-        {id: 2, name: 'Leonardo', description: 'curtiu seu post.'},
-        {id: 3, name: 'Gustavo', description: 'curtiu seu post.'}
-    ]);
+export default function Like() {
+  const [likesList, setLikesList] = useState([]);
 
-    const liked = (id) => {
-        const likeList = likes.find(whoLiked => whoLiked.id === id);
-        setLikes(likeList);
-    }
+  const handleGetLikeList = async () => {
+    const likeList = await api.get('/posts/likes');
+    setLikesList(likeList.data);
+  }
 
-    const renderPost = ({ item }) => {
-      const { name, description, id } = item;
-  
-      return(
-        <LikedContainer>
-          <LikedUsername>{name}</LikedUsername>
-          <LikedDescription>{description}</LikedDescription>
-        </LikedContainer>
-      );  
-    }
+  useEffect(() => {
+    handleGetLikeList();
+  }, []);
+
+  const renderPost = ({ item }) => {
+    const { user } = item;
 
     return(
-        <>
-            <Header>
-                <Title>Likes</Title>
-            </Header>
-            <Container>
-                <FlatList
-                    key="list"
-                    data={likes}
-                    keyExtractor={likes => String(likes.id)}
-                    renderItem={renderPost}
-                    showsVerticalScrollIndicator={false}
-                />
-            </Container>
-        </>
-    );
+      <LikedContainer>
+        <LikedUsername>{user.user}</LikedUsername>
+        <LikedDescription>curtiu sua publicação</LikedDescription>
+      </LikedContainer>
+    );  
+  }
+
+  return(
+    <Container>
+      <FlatList
+        key="list"
+        data={likesList}
+        keyExtractor={likes => String(likes.id)}
+        renderItem={renderPost}
+        showsVerticalScrollIndicator={false}
+      />
+    </Container>
+  );
 }

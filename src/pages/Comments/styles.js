@@ -9,7 +9,7 @@ export const CommentContainer = styled.View`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   padding: 15px 15px 0 15px;
 `;
 
@@ -20,15 +20,8 @@ export const CommentUsername = styled.Text`
 
 export const CommentUserComment = styled.Text`
   font-size: 18px;
-  padding-left: 5px;
+  padding-left: 10px;
 `;
-
-export const CommentLeftSide = styled.View`
-  display: flex;
-  flex-direction: row;
-`;
-
-export const CommentRightSide = styled.View``;
 
 export const Loading = styled.ActivityIndicator.attrs({
   size: 'small',
