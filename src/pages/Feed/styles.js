@@ -37,6 +37,7 @@ export const ButtonIcon = styled.TouchableOpacity`
 
 export const Name = styled.Text`
   font-weight: 600;
+  padding-right: 10px;
 `;
 
 export const Description = styled.Text`

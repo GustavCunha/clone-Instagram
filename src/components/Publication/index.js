@@ -32,22 +32,23 @@ export default function Publication({item}){
     }
 
     function handleToComments(){
-        navigation.navigate('Comment', {imageId: item.id});
+        navigation.navigate('Comment', {imageId: item._id});
     }
+
     return(
         <Container>
             <Header>
                 {/* Avatar e Nome  */}
-                <Avatar source={{uri: item.author.avatar}}/>
-                <Name>{item.author.name}</Name>
+                {/* <Avatar source={item.user.avatar}/> */}
+                <Name>{item.user.name}</Name>
             </Header>
             <Main>
                 {/* Imagem, Buttons, Description */}
                 <LazyImage
-                    aspectRatio={item.aspectRatio} 
-                    shouldLoad={viewable.includes(item.id)} 
-                    smallSource={{ uri: item.small }}
-                    source={{ uri: item.image }}
+                    aspectRatio={item.image.aspectRatio} 
+                    shouldLoad={viewable.includes(item._id)} 
+                    smallSource={item.image.small}
+                    source={item.image[1]}
                 />
                 <Buttons>
                     <View style={{flexDirection: 'row'}}>
@@ -73,7 +74,7 @@ export default function Publication({item}){
                     <Text>Curtido por ...</Text>
                 </Link>
                 <Description>
-                    <Author>{item.author.name}</Author> {item.description} 
+                    <Author>{item.user.name}</Author> {item.description} 
                 </Description>
             </Main>
             <Footer>
