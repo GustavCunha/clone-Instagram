@@ -44,7 +44,7 @@ export default function Publication({item}){
     }    
 
     function handleToLikes(){
-        navigation.navigate('Likes');
+        navigation.navigate('Likes', {itemId: item._id});
     }
 
     function handleToComments(){

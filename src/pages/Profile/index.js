@@ -9,12 +9,12 @@ export default function Profile(){
     useEffect(()=>{
         async function loadData(){
             const result = await AsyncStorage.getItem('@CloneInsta:user');
-            console.log(JSON.parse(result));
+            // console.log(JSON.parse(result));
             setDados(JSON.parse(result));
         }
 
         loadData();
-    },[dados]);
+    },[]);
     
 
     return(

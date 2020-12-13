@@ -8,9 +8,19 @@ import {
 import { FlatList } from 'react-native';
 
 import api from '../../services/api';
+import { useRoute } from '@react-navigation/native';
 
 export default function Like() {
   const [likesList, setLikesList] = useState([]);
+  const route = useRoute();
+  const {itemId} = route.params;
+
+  async function getLikesInPost(){
+    let list = await api.get(`/posts/listLikes/${itemId}`);
+    console.log(list.data);
+    
+
+  }
 
   const handleGetLikeList = async () => {
     const likeList = await api.get('/posts/likes');
@@ -18,7 +28,7 @@ export default function Like() {
   }
 
   useEffect(() => {
-    handleGetLikeList();
+    getLikesInPost();
   }, []);
 
   const renderPost = ({ item }) => {
