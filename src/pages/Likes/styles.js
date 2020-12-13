@@ -18,9 +18,11 @@ export const LikedContainer = styled.View`
 export const LikedUsername = styled.Text`
   font-weight: bold;
   font-size: 18px;
+  flex: 1;
 `;
 
 export const LikedDescription = styled.Text`
   font-size: 18px;
   padding-left: 10px;
+  flex: 1;
 `;

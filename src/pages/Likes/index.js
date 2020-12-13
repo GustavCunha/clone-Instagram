@@ -16,10 +16,10 @@ export default function Like() {
   const {itemId} = route.params;
 
   async function getLikesInPost(){
-    let list = await api.get(`/posts/listLikes/${itemId}`);
-    console.log(list.data);
-    
 
+    let list = await api.get(`/posts/listLikes/${itemId}`);
+    // console.log(list.data);
+    setLikesList(list.data);
   }
 
   const handleGetLikeList = async () => {
@@ -36,7 +36,7 @@ export default function Like() {
 
     return(
       <LikedContainer>
-        <LikedUsername>{user.user}</LikedUsername>
+        <LikedUsername>{item}</LikedUsername>
         <LikedDescription>curtiu sua publicação</LikedDescription>
       </LikedContainer>
     );  
@@ -47,7 +47,7 @@ export default function Like() {
       <FlatList
         key="list"
         data={likesList}
-        keyExtractor={likes => String(likes.id)}
+        keyExtractor={likes => String(likes)}
         renderItem={renderPost}
         showsVerticalScrollIndicator={false}
       />

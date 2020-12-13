@@ -26,17 +26,16 @@ export default function Publication({item}){
     const [like, setLike] = useState(false);
     const [viewable, setViewable] = useState([]);
     const navigation = useNavigation();
-    let result;
+    let result = '';
 
-    useEffect(()=>{
-        async function loadUser(){
-            result = await AsyncStorage.getItem('@CloneInsta:userID');
-        }
-        loadUser();
-    },[result]);
+    async function getUser(){
+        result = await AsyncStorage.getItem('@CloneInsta:userID');
+        console.log(result);
+    }
+    
     
     async function handleLike(){
-        console.log(result);
+        getUser();
         setLike(!like);
         await API.post(`/posts/likes/${item._id}`,{
             user: result
